@@ -6,10 +6,13 @@ const int SCREEN_HEIGHT = 800;
 
 const int W = 800;
 const int H = 800;
-long double min = -2.0;
-long double max = 2.0;
+/* long double min = -2.0; */
+/* long double max = 2.0; */
+long double min = -2.84;
+long double max = 1.0;
+long double factor = 1;
 
-int ITERATIONS = 400;
+int ITERATIONS = 200;
 
 /* float map(float val, float in_min, float in_max, float out_min, float out_max) { */
 /*     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min; */
@@ -23,6 +26,7 @@ int main(int argc, char* argv[]) {
     SDL_Surface* surface = NULL;
     SDL_Renderer* renderer = NULL;
     bool quit = false;
+    int count = 0;
     SDL_Event e;
 
     Uint64 NOW = SDL_GetPerformanceCounter();
@@ -49,6 +53,17 @@ int main(int argc, char* argv[]) {
                 quit = true;
                 break;
             }
+        }
+
+        // zoom
+        max -= 0.1 * factor;
+        min += 0.15 * factor;
+        factor *= 0.9349;
+        ITERATIONS += 5;
+
+        if (count > 30) {
+            // bump iterations for better accuracy as we zoom in
+            ITERATIONS += 5;
         }
 
         SDL_SetRenderDrawColor(renderer, 0x37, 0x2f, 0xbe, 0xff);
