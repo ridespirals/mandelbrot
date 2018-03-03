@@ -12,7 +12,7 @@ long double min = -2.84;
 long double max = 1.0;
 long double factor = 1;
 
-int ITERATIONS = 200;
+int ITERATIONS = 300;
 
 /* float map(float val, float in_min, float in_max, float out_min, float out_max) { */
 /*     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min; */
@@ -76,24 +76,22 @@ int main(int argc, char* argv[]) {
         for (int x = 0; x < W; x++) {
             for (int y = 0; y < H; y++) {
 
-                long double a = map(x, 0, W, min, max);
-                long double b = map(y, 0, H, min, max);
+                long double cr = map(x, 0, W, min, max);
+                long double ci = map(y, 0, H, min, max);
 
-                long double ai = a;
-                long double bi = b;
+                long double zr = 0.0;
+                long double zi = 0.0;
+                long double zrsq = zr * zr;
+                long double zisq = zi * zi;
 
                 int n = 0;
-                for (int i = 0; i < ITERATIONS; i++) {
-                    long double a1 = a*a - b*b;
-                    long double b1 = 2 * a * b;
-
-                    a = a1 + ai;
-                    b = b1 + bi;
-
-                    if ((a + b) > 2.0) {
-                        break;
-                    }
-
+                while (n < ITERATIONS && zrsq + zisq <= 4.0) {
+                    zi = zr * zi;
+                    zi += zi; // multiply by two
+                    zi += ci;
+                    zr = zrsq - zisq + cr;
+                    zrsq = zr * zr;
+                    zisq = zi * zi;
                     n++;
                 }
 
