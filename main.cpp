@@ -16,12 +16,16 @@ int main(int argc, char* argv[]) {
     bool quit = false;
     SDL_Event e;
 
+    Uint64 NOW = SDL_GetPerformanceCounter();
+    Uint64 LAST = 0;
+    double deltaTime = 0;
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Could not init SDL: %s\n", SDL_GetError());
         return 1;
     } else {
         window = SDL_CreateWindow(
-            "An SDL2 Window",
+            "Mandelbrot",
             SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED,
             SCREEN_WIDTH,
@@ -38,6 +42,10 @@ int main(int argc, char* argv[]) {
                         quit = true;
                     }
                 }
+
+                LAST = NOW;
+                NOW = SDL_GetPerformanceCounter();
+                deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
 
                 surface = SDL_GetWindowSurface(window);
 
