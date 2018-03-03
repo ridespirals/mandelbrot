@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1200;
+const int SCREEN_HEIGHT = 800;
 
 float map(float val, float in_min, float in_max, float out_min, float out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -24,8 +24,7 @@ int main(int argc, char* argv[]) {
             SDL_WINDOWPOS_UNDEFINED,
             SCREEN_WIDTH,
             SCREEN_HEIGHT,
-            // SDL_WINDOW_SHOWN
-            SDL_WINDOW_OPENGL
+            SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
         );
         if (window == NULL) {
             printf("Could not create window %s\n", SDL_GetError());
