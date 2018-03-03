@@ -9,7 +9,7 @@ const int H = 800;
 long double min = -2.0;
 long double max = 2.0;
 
-int ITERATIONS = 200;
+int ITERATIONS = 400;
 
 /* float map(float val, float in_min, float in_max, float out_min, float out_max) { */
 /*     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min; */
@@ -82,10 +82,18 @@ int main(int argc, char* argv[]) {
                     n++;
                 }
 
-                if (n == ITERATIONS) {
-                    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-                    SDL_RenderDrawPoint(renderer, x, y);
+                int bright = map(n, 0, ITERATIONS, 0, 255);
+
+                if (n == ITERATIONS || bright < 20) {
+                    bright = 0;
                 }
+
+                int red = map(bright * bright, 0, 6502, 0, 255);
+                int green = bright;
+                int blue = map(sqrt(bright), 0, sqrt(255), 0, 255);
+
+                SDL_SetRenderDrawColor(renderer, red, green, blue, 255);
+                SDL_RenderDrawPoint(renderer, x, y);
             }
         }
 
