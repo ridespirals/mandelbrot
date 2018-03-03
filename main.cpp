@@ -6,18 +6,15 @@ const int SCREEN_HEIGHT = 800;
 
 const int W = 800;
 const int H = 800;
-/* long double min = -2.0; */
-/* long double max = 2.0; */
-long double min = -2.84;
-long double max = 1.0;
-long double factor = 1;
+/* float min = -2.0; */
+/* float max = 2.0; */
+float min = -2.84;
+float max = 1.0;
+float factor = 1;
 
-int ITERATIONS = 300;
+int ITERATIONS = 100;
 
-/* float map(float val, float in_min, float in_max, float out_min, float out_max) { */
-/*     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min; */
-/* } */
-long double map(long double val, long double in_min, long double in_max, long double out_min, long double out_max) {
+float map(float val, float in_min, float in_max, float out_min, float out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
@@ -76,20 +73,20 @@ int main(int argc, char* argv[]) {
         for (int x = 0; x < W; x++) {
             for (int y = 0; y < H; y++) {
 
-                long double cr = map(x, 0, W, min, max);
-                long double ci = map(y, 0, H, min, max);
+                float cr = map(x, 0, W, min, max);
+                float ci = map(y, 0, H, min, max);
 
-                long double zr = 0.0;
-                long double zi = 0.0;
-                long double zrsq = zr * zr;
-                long double zisq = zi * zi;
+                float zr = 0.0;
+                float zi = 0.0;
+                float zrsq = zr * zr;
+                float zisq = zi * zi;
 
                 int n = 0;
                 while (n < ITERATIONS && zrsq + zisq <= 4.0) {
-                    zi = zr * zi;
-                    zi += zi; // multiply by two
+                    zi = (zr + zi) * (zr + zi) - zrsq - zisq;
                     zi += ci;
                     zr = zrsq - zisq + cr;
+
                     zrsq = zr * zr;
                     zisq = zi * zi;
                     n++;
