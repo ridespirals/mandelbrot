@@ -27,7 +27,6 @@ float map(float val, float in_min, float in_max, float out_min, float out_max) {
 
 int main(int argc, char* argv[]) {
     SDL_Window* window = NULL;
-    SDL_Surface* surface = NULL;
     SDL_Renderer* renderer = NULL;
     bool quit = false;
     int count = 0;
