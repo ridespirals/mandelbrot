@@ -7,12 +7,12 @@ const int SCREEN_HEIGHT = 800;
 const int W = 800;
 const int H = 800;
 
-float min, max, factor;
+long double min, max, factor;
 int ITERATIONS;
 
-float start_min = -2.87;
-float start_max = 1.0;
-float start_factor = 1;
+long double start_min = -2.87;
+long double start_max = 1.0;
+long double start_factor = 1;
 int start_iterations = 200;
 void reset() {
     min = start_min;
@@ -21,7 +21,7 @@ void reset() {
     ITERATIONS = start_iterations;
 }
 
-float map(float val, float in_min, float in_max, float out_min, float out_max) {
+long double map(long double val, long double in_min, long double in_max, long double out_min, long double out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
@@ -80,13 +80,13 @@ int main(int argc, char* argv[]) {
             for (int x = 0; x < W; x++) {
                 for (int y = 0; y < H; y++) {
 
-                    float cr = map(x, 0, W, min, max);
-                    float ci = map(y, 0, H, min, max);
+                    long double cr = map(x, 0, W, min, max);
+                    long double ci = map(y, 0, H, min, max);
 
-                    float zr = 0.0;
-                    float zi = 0.0;
-                    float zrsq = zr * zr;
-                    float zisq = zi * zi;
+                    long double zr = 0.0;
+                    long double zi = 0.0;
+                    long double zrsq = zr * zr;
+                    long double zisq = zi * zi;
 
                     int n = 0;
                     while (n < ITERATIONS && zrsq + zisq <= 4.0) {
