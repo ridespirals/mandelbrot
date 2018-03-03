@@ -6,13 +6,20 @@ const int SCREEN_HEIGHT = 800;
 
 const int W = 800;
 const int H = 800;
-/* float min = -2.0; */
-/* float max = 2.0; */
-float min = -2.84;
-float max = 1.0;
-float factor = 1;
 
-int ITERATIONS = 100;
+float min, max, factor;
+int ITERATIONS;
+
+float start_min = -2.87;
+float start_max = 1.0;
+float start_factor = 1;
+int start_iterations = 200;
+void reset() {
+    min = start_min;
+    max = start_max;
+    factor = start_factor;
+    ITERATIONS = start_iterations;
+}
 
 float map(float val, float in_min, float in_max, float out_min, float out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -26,10 +33,7 @@ int main(int argc, char* argv[]) {
     int count = 0;
     SDL_Event e;
 
-    Uint64 NOW = SDL_GetPerformanceCounter();
-    Uint64 LAST = 0;
-    double deltaTime = 0;
-
+    reset();
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Could not init SDL: %s\n", SDL_GetError());
