@@ -3,6 +3,7 @@
 
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 800;
+
 const int W = 800;
 const int H = 800;
 
@@ -13,6 +14,7 @@ float map(float val, float in_min, float in_max, float out_min, float out_max) {
 int main(int argc, char* argv[]) {
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
+    SDL_Renderer* renderer = NULL;
     bool quit = false;
     SDL_Event e;
 
@@ -20,42 +22,39 @@ int main(int argc, char* argv[]) {
     Uint64 LAST = 0;
     double deltaTime = 0;
 
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Could not init SDL: %s\n", SDL_GetError());
         return 1;
-    } else {
-        window = SDL_CreateWindow(
-            "Mandelbrot",
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
-            SCREEN_WIDTH,
-            SCREEN_HEIGHT,
-            SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
-        );
-        if (window == NULL) {
-            printf("Could not create window %s\n", SDL_GetError());
-            return 1;
-        } else {
-            while (!quit) {
-                while (SDL_PollEvent(&e) != 0) {
-                    if (e.type == SDL_QUIT) {
-                        quit = true;
-                    }
-                }
-
-                LAST = NOW;
-                NOW = SDL_GetPerformanceCounter();
-                deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
-
-                surface = SDL_GetWindowSurface(window);
-
-                SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xf2, 0x55, 0x55));
-                SDL_UpdateWindowSurface(window);
-
-            }
-        }
     }
 
+    if (SDL_CreateWindowAndRenderer(
+            SCREEN_WIDTH, SCREEN_HEIGHT,
+            SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE,
+            &window, &renderer)) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
+    }
+
+    while (!quit) {
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                quit = true;
+                break;
+            }
+        }
+
+        LAST = NOW;
+        NOW = SDL_GetPerformanceCounter();
+        deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+
+
+        SDL_SetRenderDrawColor(renderer, 0x37, 0x2f, 0xbe, 0xff);
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+
+    }
+
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
     SDL_Quit();
