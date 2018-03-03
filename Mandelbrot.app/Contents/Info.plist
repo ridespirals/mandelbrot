@@ -7,7 +7,7 @@
     <key>CFBundleDisplayName</key>
     <string>Mandelbrot</string>
     <key>CFBundleExecutable</key>
-    <string>a.out</string>
+    <string>main</string>
     <key>CFBundleName</key>
     <string>Mandelbrot</string>
     <key>CFBundlePackageType</key>
