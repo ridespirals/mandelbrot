@@ -4,3 +4,6 @@ main: main.cpp
 run: main
 	./main
 
+bundle: main
+	cp main Mandelbrot.app/Content/MacOS
+	echo "Mandelbrot.app bundle complete"

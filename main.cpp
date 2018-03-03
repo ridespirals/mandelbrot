@@ -3,6 +3,8 @@
 
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 800;
+const int W = 800;
+const int H = 800;
 
 float map(float val, float in_min, float in_max, float out_min, float out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
