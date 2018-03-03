@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
     if (SDL_CreateWindowAndRenderer(
             SCREEN_WIDTH, SCREEN_HEIGHT,
-            SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI,
+            SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP, 
             &window, &renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
     }
