@@ -10,9 +10,10 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 int main(int argc, char* argv[]) {
-    printf("Hello, world!\n");
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
+    bool quit = false;
+    SDL_Event e;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Could not init SDL: %s\n", SDL_GetError());
@@ -31,12 +32,19 @@ int main(int argc, char* argv[]) {
             printf("Could not create window %s\n", SDL_GetError());
             return 1;
         } else {
-            surface = SDL_GetWindowSurface(window);
+            while (!quit) {
+                while (SDL_PollEvent(&e) != 0) {
+                    if (e.type == SDL_QUIT) {
+                        quit = true;
+                    }
+                }
 
-            SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xf2, 0x55, 0x55));
-            SDL_UpdateWindowSurface(window);
+                surface = SDL_GetWindowSurface(window);
 
-            SDL_Delay(3000);
+                SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xf2, 0x55, 0x55));
+                SDL_UpdateWindowSurface(window);
+                
+            }
         }
     }
 
