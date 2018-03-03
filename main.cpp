@@ -1,8 +1,3 @@
-/*
-    clang++ -std=c++11 -stdlib=libc++ main.cpp  -I/usr/local/include -L/usr/local/lib -lSDL2 -o main
-
-    https://stackoverflow.com/questions/23861914/how-to-hide-terminal-window-in-mac-osx
-*/
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
@@ -43,7 +38,7 @@ int main(int argc, char* argv[]) {
 
                 SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xf2, 0x55, 0x55));
                 SDL_UpdateWindowSurface(window);
-                
+
             }
         }
     }
