@@ -1,0 +1,7 @@
+CFLAGS += -Wall
+CFLAGS += -O3
+CFLAGS += -std=c++11
+CFLAGS += -stdlib=libc++
+
+!cc = |> clang++ $(CFLAGS) %f -o %o |>
+

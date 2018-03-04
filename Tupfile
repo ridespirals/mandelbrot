@@ -1,1 +1,8 @@
-: main.cpp |> clang++ -Wall -O3 -m64 -std=c++11 -stdlib=libc++ %f -I/usr/local/include -L/usr/local/lib -lSDL2 -o %o |> main
+include_rules
+
+CFLAGS += -I/usr/local/include
+CFLAGS += -L/usr/local/lib
+CFLAGS += -lSDL2
+
+: main.cpp |> !cc |> main
+
