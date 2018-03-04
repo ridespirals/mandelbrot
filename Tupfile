@@ -1,8 +1,8 @@
 include_rules
 
-CFLAGS += -I/usr/local/include
-CFLAGS += -L/usr/local/lib
-CFLAGS += -lSDL2
+CXXFLAGS += -I/usr/local/include
+CXXFLAGS += -L/usr/local/lib
+CXXFLAGS += -lSDL2
 
 : mandelbrot.cpp |> !cc |> mandelbrot
 

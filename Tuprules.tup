@@ -1,7 +1,7 @@
-CFLAGS += -Wall
-CFLAGS += -O3
-CFLAGS += -std=c++11
-CFLAGS += -stdlib=libc++
+CXXFLAGS += -Wall
+CXXFLAGS += -O3
+CXXFLAGS += -std=c++11
+CXXFLAGS += -stdlib=libc++
 
-!cc = |> clang++ $(CFLAGS) %f -o %o |>
+!cc = |> clang++ $(CXXFLAGS) %f -o %o |>
 
