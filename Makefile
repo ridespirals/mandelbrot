@@ -1,9 +1,9 @@
-main: main.cpp
-	clang++ -Wall -std=c++11 -stdlib=libc++ main.cpp  -I/usr/local/include -L/usr/local/lib -lSDL2 -o main
+main: mandelbrot.cpp
+	clang++ -Wall -std=c++11 -stdlib=libc++ mandelbrot.cpp  -I/usr/local/include -L/usr/local/lib -lSDL2 -o mandelbrot
 
-run: main
-	./main
+run: mandelbrot
+	./mandelbrot
 
-bundle: main
-	cp main Mandelbrot.app/Content/MacOS
+bundle: mandelbrot
+	cp mandelbrot Mandelbrot.app/Contents/MacOS
 	echo "Mandelbrot.app bundle complete"

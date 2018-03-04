@@ -4,5 +4,5 @@ CFLAGS += -I/usr/local/include
 CFLAGS += -L/usr/local/lib
 CFLAGS += -lSDL2
 
-: main.cpp |> !cc |> main
+: mandelbrot.cpp |> !cc |> mandelbrot
 
