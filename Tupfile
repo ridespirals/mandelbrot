@@ -3,6 +3,9 @@ include_rules
 CXXFLAGS += -I/usr/local/include
 CXXFLAGS += -L/usr/local/lib
 CXXFLAGS += -lSDL2
+CXXFLAGS += -framework OpenGL
 
 : mandelbrot.cpp |> !cc |> mandelbrot
+
+: gl.cpp |> !cc |> gltest
 
