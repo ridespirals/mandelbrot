@@ -15,6 +15,7 @@
 * [http://lazyfoo.net/tutorials/SDL/index.php#Hello SDL](http://lazyfoo.net/tutorials/SDL/index.php#Hello%20SDL)
 * [https://stackoverflow.com/questions/1596945/building-osx-app-bundle](https://stackoverflow.com/questions/1596945/building-osx-app-bundle)
 * [https://randomascii.wordpress.com/2011/08/13/faster-fractals-through-algebra/](https://randomascii.wordpress.com/2011/08/13/faster-fractals-through-algebra/)
+* [http://headerphile.com/](http://headerphile.com/)
 
 ### Building app bundle
 1. `otool -L executable_name` : list libs used by the binary
