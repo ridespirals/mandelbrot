@@ -77,6 +77,7 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 0x37, 0x2f, 0xbe, 0xff);
             SDL_RenderClear(renderer);
 
+            #pragma omp parallel for
             for (int x = 0; x < W; x++) {
                 for (int y = 0; y < H; y++) {
 
